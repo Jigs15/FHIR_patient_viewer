@@ -6869,7 +6869,12 @@
     }
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
     "eslint-config-next": "^16.0.10",
-    "next": "^16.0.10"
+    "next": "^16.0.10",
+    "recharts": "^3.6.0"
   }
 }
