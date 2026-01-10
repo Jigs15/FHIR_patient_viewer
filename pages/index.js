@@ -16,6 +16,16 @@ import {
   BarChart,
   Bar,
 } from "recharts";
+import Link from "next/link";
+import { Button } from "@mui/material";
+<Button
+  component={Link}
+  href="/legacy"
+  variant="contained"
+  sx={{ borderRadius: 999, fontWeight: 800, alignSelf: "start" }}
+>
+  Open Full FHIR Viewer
+</Button>
 
 export default function OverviewPage() {
   const [data, setData] = React.useState(null);
