@@ -45,9 +45,16 @@ export default function DashboardLayout({ title, subtitle, children }) {
           </div>
 
           <div>
-            <div style={{ fontWeight: 900, letterSpacing: 0.3, lineHeight: 1.1 }}>
-              FHIR Patient Viewer
-            </div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
+  <div style={{ fontWeight: 900, letterSpacing: 0.3, lineHeight: 1.1 }}>
+    FHIR Patient Viewer
+  </div>
+
+  <div style={{ fontSize: 12, color: "var(--muted)", fontWeight: 800 }}>
+    • Created by Jignesh Patel
+  </div>
+</div>
+
             <div style={{ fontSize: 12, color: "var(--muted)" }}>
               Interoperable Clinical + Ops Dashboard (Demo)
             </div>
