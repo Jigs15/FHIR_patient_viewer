@@ -1,56 +1,96 @@
+// components/FilterBar.jsx
 import * as React from "react";
-import { Box, TextField, MenuItem, Button, Stack } from "@mui/material";
 
 export default function FilterBar({
-  search,
-  onSearch,
-  gender,
-  onGender,
-  city,
-  onCity,
-  cities = [],
-  onReset,
+  filters,
+  setFilters,
+  departmentOptions = [],
+  typeOptions = [],
+  yearOptions = [],
+  readmitOptions = ["All", "Yes", "No"],
 }) {
+  const safe = (arr) => (Array.isArray(arr) ? arr : []);
+
+  const fieldStyle = {
+    width: "100%",
+    padding: "10px 12px",
+    borderRadius: 12,
+    background: "rgba(0,0,0,0.18)",
+    border: "1px solid rgba(255,255,255,0.14)",
+    color: "rgba(255,255,255,0.90)",
+    outline: "none",
+  };
+
+  const labelStyle = { fontSize: 12, color: "rgba(255,255,255,0.60)", fontWeight: 800 };
+
   return (
-    <Box sx={{ p: 2, mb: 2, bgcolor: "rgba(255,255,255,0.06)", borderRadius: 3 }}>
-      <Stack direction={{ xs: "column", md: "row" }} spacing={2} alignItems="center">
-        <TextField
-          fullWidth
-          label="Search patient"
-          value={search}
-          onChange={(e) => onSearch(e.target.value)}
-        />
-
-        <TextField
-          select
-          label="Gender"
-          value={gender}
-          onChange={(e) => onGender(e.target.value)}
-          sx={{ minWidth: 160 }}
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, minmax(160px, 1fr))",
+        gap: 12,
+        alignItems: "end",
+      }}
+    >
+      <div>
+        <div style={labelStyle}>Department</div>
+        <select
+          style={fieldStyle}
+          value={filters.department}
+          onChange={(e) => setFilters((p) => ({ ...p, department: e.target.value }))}
         >
-          <MenuItem value="ALL">All</MenuItem>
-          <MenuItem value="Male">Male</MenuItem>
-          <MenuItem value="Female">Female</MenuItem>
-          <MenuItem value="Other">Other</MenuItem>
-        </TextField>
-
-        <TextField
-          select
-          label="City"
-          value={city}
-          onChange={(e) => onCity(e.target.value)}
-          sx={{ minWidth: 180 }}
-        >
-          <MenuItem value="ALL">All</MenuItem>
-          {cities.map((c) => (
-            <MenuItem key={c} value={c}>{c}</MenuItem>
+          {safe(departmentOptions).map((d) => (
+            <option key={d} value={d} style={{ color: "#111" }}>
+              {d}
+            </option>
           ))}
-        </TextField>
+        </select>
+      </div>
 
-        <Button variant="outlined" onClick={onReset} sx={{ whiteSpace: "nowrap" }}>
-          Reset
-        </Button>
-      </Stack>
-    </Box>
+      <div>
+        <div style={labelStyle}>Encounter Type</div>
+        <select
+          style={fieldStyle}
+          value={filters.encounter_type}
+          onChange={(e) => setFilters((p) => ({ ...p, encounter_type: e.target.value }))}
+        >
+          {safe(typeOptions).map((t) => (
+            <option key={t} value={t} style={{ color: "#111" }}>
+              {t}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <div style={labelStyle}>Year</div>
+        <select
+          style={fieldStyle}
+          value={filters.year}
+          onChange={(e) => setFilters((p) => ({ ...p, year: e.target.value }))}
+        >
+          {safe(yearOptions).map((y) => (
+            <option key={y} value={y} style={{ color: "#111" }}>
+              {y}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <div style={labelStyle}>Readmitted</div>
+        <select
+          style={fieldStyle}
+          value={filters.readmitted}
+          onChange={(e) => setFilters((p) => ({ ...p, readmitted: e.target.value }))}
+        >
+          {safe(readmitOptions).map((r) => (
+            <option key={r} value={r} style={{ color: "#111" }}>
+              {r}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
   );
 }

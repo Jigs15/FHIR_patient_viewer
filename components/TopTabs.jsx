@@ -2,9 +2,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Tabs, Tab, Box } from "@mui/material";
 
 const tabs = [
+  { label: "Intro", href: "/intro" },
   { label: "Overview", href: "/" },
   { label: "Patient", href: "/patient" },
   { label: "Doctors", href: "/doctors" },
@@ -14,52 +14,45 @@ const tabs = [
 
 export default function TopTabs() {
   const router = useRouter();
-
-  const current = React.useMemo(() => {
-    const hit = tabs.find((t) => t.href === router.pathname);
-    return hit?.href ?? "/";
-  }, [router.pathname]);
+  const path = router.pathname;
 
   return (
-    <Box
-      sx={{
-        px: 2,
-        py: 1.25,
+    <nav
+      style={{
+        display: "flex",
+        gap: 8,
+        padding: 8,
         borderRadius: 999,
-        bgcolor: "rgba(255,255,255,0.14)",
-        backdropFilter: "blur(10px)",
+        background: "rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.10)",
       }}
     >
-      <Tabs
-        value={current}
-        textColor="inherit"
-        indicatorColor="secondary"
-        TabIndicatorProps={{ style: { height: 3, borderRadius: 999 } }}
-        sx={{
-          minHeight: "auto",
-          "& .MuiTab-root": {
-            minHeight: "auto",
-            textTransform: "none",
-            fontWeight: 600,
-            px: 2,
-            py: 0.75,
-            borderRadius: 999,
-          },
-          "& .MuiTab-root.Mui-selected": {
-            bgcolor: "rgba(255,255,255,0.18)",
-          },
-        }}
-      >
-        {tabs.map((t) => (
-          <Tab
-            key={t.href}
-            value={t.href}
-            label={t.label}
-            component={Link}
-            href={t.href}
-          />
-        ))}
-      </Tabs>
-    </Box>
+      {tabs.map((t) => {
+        const active = path === t.href;
+        return (
+          <Link key={t.href} href={t.href}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "9px 14px",
+                borderRadius: 999,
+                fontSize: 13,
+                fontWeight: 800,
+                color: active ? "rgba(0,0,0,0.86)" : "rgba(255,255,255,0.78)",
+                background: active
+                  ? "linear-gradient(90deg, rgba(46,230,166,0.95), rgba(76,201,240,0.85))"
+                  : "transparent",
+                boxShadow: active ? "0 10px 22px rgba(0,0,0,0.25)" : "none",
+                border: active ? "1px solid rgba(255,255,255,0.22)" : "1px solid transparent",
+              }}
+            >
+              {t.label}
+            </span>
+          </Link>
+        );
+      })}
+    </nav>
   );
 }

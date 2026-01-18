@@ -24,7 +24,7 @@ function Card({ title, children }) {
 export default function Intro() {
   return (
     <DashboardLayout
-      title="Introduction"
+      title="Intro"
       subtitle="What this project is • why FHIR matters • how this dashboard works"
     >
       <div

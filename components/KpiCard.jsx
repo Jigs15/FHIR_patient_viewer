@@ -1,39 +1,34 @@
 // components/KpiCard.jsx
 import * as React from "react";
-import { Paper, Typography, Box } from "@mui/material";
 
-export default function KpiCard({ label, value, suffix, sublabel }) {
+export default function KpiCard({ label, value, suffix, hint }) {
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 2,
-        borderRadius: 4,
-        bgcolor: "rgba(255,255,255,0.92)",
-        border: "1px solid rgba(20,60,120,0.08)",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.10)",
+    <div
+      style={{
+        padding: 14,
+        borderRadius: "var(--radius-lg)",
+        background: "linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06))",
+        border: "1px solid rgba(255,255,255,0.14)",
+        boxShadow: "var(--shadow2)",
+        minHeight: 86,
       }}
     >
-      <Typography variant="body2" sx={{ opacity: 0.75, fontWeight: 600 }}>
+      <div style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, fontWeight: 800 }}>
         {label}
-      </Typography>
-
-      <Box sx={{ display: "flex", alignItems: "baseline", gap: 1, mt: 0.5 }}>
-        <Typography variant="h4" sx={{ fontWeight: 900, lineHeight: 1.1 }}>
+      </div>
+      <div style={{ marginTop: 6, display: "flex", alignItems: "baseline", gap: 6 }}>
+        <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: -0.4 }}>
           {value}
-        </Typography>
+        </div>
         {suffix ? (
-          <Typography sx={{ fontWeight: 700, opacity: 0.75 }}>
-            {suffix}
-          </Typography>
+          <div style={{ color: "rgba(255,255,255,0.70)", fontWeight: 800 }}>{suffix}</div>
         ) : null}
-      </Box>
-
-      {sublabel ? (
-        <Typography variant="caption" sx={{ opacity: 0.7 }}>
-          {sublabel}
-        </Typography>
+      </div>
+      {hint ? (
+        <div style={{ marginTop: 6, fontSize: 12, color: "rgba(255,255,255,0.55)" }}>
+          {hint}
+        </div>
       ) : null}
-    </Paper>
+    </div>
   );
 }
